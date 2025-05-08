@@ -1,20 +1,17 @@
----
-
-title: "🚗 Projeto de Algoritmos - Parking lot com Grafos"
+# 🛒 Grafos 2 - Supermercado Inteligente
 
 ---
 
 ## 👩‍💻 Integrantes
 
 - 202016702 Letícia Torres Soares Martins  
-- 221008801	Bianca Patrocínio Castro
+- 221008801 Bianca Patrocínio Castro
 
 ---
 
-
 ## 🎯 Objetivo
 
-Desenvolver um sistema de estacionamento que utiliza **algoritmos de grafos** para encontrar a **vaga disponível mais próxima** de uma **loja específica** escolhida pelo usuário. O sistema deve considerar tanto a **estrutura do estacionamento** (com conexões entre vagas) quanto a **ocupação atual das vagas**.
+Desenvolver um sistema que representa um **supermercado como um grafo**, permitindo encontrar o **caminho mais eficiente** para coletar todos os itens de uma **lista de compras** e chegar ao caixa. O sistema utiliza **algoritmos de caminhos mínimos**, levando em conta **distância, tempo ou congestionamento**.
 
 ---
 
@@ -22,51 +19,74 @@ Desenvolver um sistema de estacionamento que utiliza **algoritmos de grafos** pa
 
 - **Linguagem**: C++
 - **Representação do grafo**: Lista de adjacência
-- **Tipo de grafo**: Direcionado
-- **Algoritmo de busca**: BFS (Breadth-First Search)
+- **Tipo de grafo**: Ponderado e Direcionado
+- **Algoritmo principal**: Dijkstra
+- **Possíveis extensões**: Algoritmo A*, simulação de horários de pico, múltiplos coletores
 
 ---
 
 ## 🧩 Modelagem do Grafo
 
 ### 🟢 Nós (Vértices)
-Cada **nó** do grafo representa uma **vaga** do estacionamento.
+
+Cada **nó** representa um ponto do supermercado:
+
+- Corredores  
+- Seções de produtos  
+- Entrada  
+- Caixas
 
 #### Atributos de um nó:
-- `id`: número da vaga
-- `loja_proxima`: nome da loja mais próxima (ex: "Americanas")
-- `ocupada`: booleano indicando se a vaga está ocupada (`true`) ou livre (`false`)
+
+- `id`: identificador do ponto  
+- `tipo`: tipo do ponto (ex: "frutas", "bebidas", "entrada", "caixa")  
+- `item`: nome do item disponível (ou `null` se não houver item no local)
 
 ### 🔗 Arestas
-As **arestas** representam os **caminhos** entre as vagas do estacionamento. Como nem todos os caminhos são necessariamente bidirecionais, o grafo será **direcionado**.
 
-### 🧱 Estrutura de dados utilizada
-Usaremos uma **lista de adjacência** para representar o grafo.
+As **arestas** representam os caminhos entre os pontos do supermercado.
 
----
+#### Atributos das arestas:
 
-## 🏪 Lojas Disponíveis
+- `peso`: representa a distância, tempo ou fator de congestionamento entre os pontos
 
-As lojas próximas às vagas são:
-
-- Americanas
-- Magazine Luiza (Magalu)
-- C&A
-- Outros exemplos
+> Durante simulações de **horários de pico**, os pesos podem ser aumentados para refletir o congestionamento.
 
 ---
 
 ## 🧠 Funcionamento do Algoritmo
 
-1. O usuário escolhe uma loja de destino.
-2. O algoritmo percorre o grafo com **BFS**, partindo das vagas mais próximas à loja.
-3. A busca ignora vagas ocupadas.
-4. O sistema retorna a **vaga disponível mais próxima** da loja escolhida.
+1. O usuário (ou sistema) fornece uma **lista de compras**.
+2. Cada item da lista é associado a um **nó no grafo**.
+3. O algoritmo de **Dijkstra** encontra o menor caminho para:
+   - Passar por todos os nós da lista
+   - Finalizar no caixa
+   - Começando pela entrada
+4. O sistema retorna o **caminho ideal para coleta**.
 
-## Apresentação 
+---
 
-<div align="center">
-<a href="https://youtu.be/PoJ3FK-J3wM?si=VLjQ5nK-w6U8Dh7-"><img src="https://i.imgur.com/nNBEJk2.png" width="50%"></a>
-</div>
+## 🌟 Funcionalidades Extras (Planejadas)
 
-<font size="3"><p style="text-align: center">Autor: [Bianca Patrocínio](https://github.com/BiancaPatrocinio7) e [Letícia Torres](https://github.com/leticiatmartins).</p></font>
+- 🔄 **Comparação de algoritmos**: Dijkstra vs A*
+- ⏰ **Simulação de horários de pico**
+- 🧑‍🤝‍🧑 **Múltiplos coletores**: divisão otimizada da lista
+- 🎮 **Modo jogo**: o usuário tenta montar o caminho ideal manualmente e o sistema compara com o algoritmo
+
+---
+
+## 📊 Exemplo de Caso de Uso
+
+**Entrada**: Lista de compras: `["banana", "arroz", "detergente"]`  
+**Saída**: Caminho ideal: `Entrada → Frutas → Limpeza → Grãos → Caixa`  
+**Peso total**: `12 unidades de distância`
+
+---
+
+## 🎥 Apresentação
+
+
+
+<p align="center">Autor: <a href="https://github.com/BiancaPatrocinio7">Bianca Patrocínio</a> e <a href="https://github.com/leticiatmartins">Letícia Torres</a>.</p>
+
+---
