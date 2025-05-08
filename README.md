@@ -1,6 +1,8 @@
-Entrega-02
+# 🛒 Grafos 2 - Supermercado Inteligente
 
-**Número da Lista**: 
+**Número da Lista**: 2
+
+
 **Conteúdo da Disciplina**: FGA0124 - PROJETO DE ALGORITMOS - T01  
 
 
