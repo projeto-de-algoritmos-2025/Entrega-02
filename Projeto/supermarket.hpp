@@ -1,5 +1,5 @@
-#ifndef ESTACIONAMENTO_HPP
-#define ESTACIONAMENTO_HPP
+#ifndef SUPERMARKET_HPP
+#define SUPERMARKET_HPP
 
 #include <vector>
 #include <string>
