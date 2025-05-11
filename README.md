@@ -24,7 +24,7 @@
 </div>
 
 ## Sobre 
-
+Desenvolver um sistema que representa um **supermercado como um grafo**, permitindo encontrar o **caminho mais eficiente** para coletar todos os itens de uma **lista de compras** e chegar ao caixa. O sistema utiliza **algoritmos de caminhos mínimos**, levando em conta **distância, tempo ou congestionamento**.
 ## Screenshots
 
 
@@ -32,8 +32,7 @@
 
 
 ## Instalação 
-**Linguagem**: 
-
+**Linguagem**:  C++
 ## Pré-requisitos
 
 
