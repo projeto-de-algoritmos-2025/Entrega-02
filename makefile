@@ -1,5 +1,5 @@
 # Nome do executável
-EXEC = Grafos-1-Parking-lot
+EXEC = Grafos-1-Supermarket
 
 # Pasta com os arquivos-fonte
 SRC_DIR = Projeto

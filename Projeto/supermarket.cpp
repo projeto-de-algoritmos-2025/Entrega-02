@@ -1,38 +1,22 @@
 #include "supermarket.hpp"
 #include <iostream>
 
-vector<string> lojas;
-vector<Vaga> vagas(18);
+void inicializarLojasSupermercado() {
+    Grafo g;
 
-void inicializarLojas() {
-    lojas = {"Renner", "C&A", "Sodiê", "Chiquinho", "Ciatoy", "Samgung"};
-}
+    g.adicionarEstante(1, "Hortifruti", "Banana");
+    g.adicionarEstante(2, "Hortifruti", "Maçã");
+    g.adicionarEstante(3, "Padaria", "Pão");
+    g.adicionarEstante(4, "Bebidas", "Coca-Cola");
+    g.adicionarEstante(5, "Congelados", "Sorvete");
+    g.adicionarEstante(6, "Laticínios", "Queijo");
 
-void inicializarVagas() {
-    int vagaPorLoja = 3;
-    for (int i = 0; i < 18; ++i) {
-        vagas[i].id = i + 1;
-        vagas[i].ocupada = false;
-        vagas[i].nomeLoja = lojas[i / vagaPorLoja]; 
-    }
-}
+    g.adicionarAresta(1, 2, 2.0);
+    g.adicionarAresta(2, 3, 1.5);
+    g.adicionarAresta(3, 4, 2.0);
+    g.adicionarAresta(4, 5, 1.0);
+    g.adicionarAresta(5, 6, 3.0);
+    g.adicionarAresta(1, 4, 5.0);
 
-void mostrarMenu() {
-    cout << "\n===== SISTEMA DE ESTACIONAMENTO =====\n";
-    cout << "1. Escolher loja e estacionar\n";
-    cout << "2. Ver mapa de estacionamento\n";
-    cout << "3. Ver desenho do estacionamento vazio\n";
-    cout << "4. Sair\n";
-    cout << "======================================\n";
-    cout << "ESCOLHA UMA OPÇÃO (1-4): ";
-}
-
-void mostrarLojas() {
-    cout << "\n======================================\n";
-    cout << "LOJAS DISPONÍVEIS:\n";
-    for (size_t i = 0; i < lojas.size(); ++i) {
-        cout << i + 1 << ". " << lojas[i] << endl;
-    }
-    cout << "======================================\n";
-    cout << "ESCOLHA UMA LOJA (1-6): ";
+    lojasGrafo["Carrefour"] = g;
 }

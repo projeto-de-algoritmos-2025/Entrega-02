@@ -1,12 +1,7 @@
 #include "supermarket.hpp"
 
-void inicializarGrafo();
-void executarMenu();
-
 int main() {
-    inicializarLojas();
-    inicializarVagas();
-    inicializarGrafo();
-    executarMenu();
+    inicializarLojasSupermercado();
+    executarMenuSupermercado();
     return 0;
 }

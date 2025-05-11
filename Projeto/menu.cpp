@@ -1,69 +1,91 @@
+#include "supermarket.hpp"
 #include <iostream>
-#include "estacionamento.hpp"
+#include <algorithm>
+#include <limits>
+
 using namespace std;
 
-extern void inicializarGrafo();
-extern pair<int, vector<int>> encontrarVagaProximaComBFS(const string& nomeLoja);
+// Função auxiliar para calcular distância total em uma sequência
+double calcularDistanciaLista(Grafo& grafo, const vector<int>& lista) {
+    double total = 0;
+    for (size_t i = 0; i + 1 < lista.size(); ++i) {
+        double parcial = 0;
+        grafo.dijkstra(lista[i], lista[i + 1], parcial);
+        total += parcial;
+    }
+    return total;
+}
 
-void executarMenu() {
-    int opcao;
-    do {
-        mostrarMenu();
-        cin >> opcao;
+void executarMenuSupermercado() {
+    string loja = "Carrefour";
+    auto& grafo = lojasGrafo[loja];
 
-        switch (opcao) {
-            case 1: {
-                mostrarLojas();
-                int escolha;
-                cin >> escolha;
-                if (escolha >= 1 && escolha <= 6) {
-                    string nomeLoja = lojas[escolha - 1];
-                    pair<int, vector<int>> resultado = encontrarVagaProximaComBFS(nomeLoja);
-                    int vaga = resultado.first;
-                    if (vaga != -1) {
-                        vagas[vaga].ocupada = true;
-                        cout << "\nEstacione na vaga " << vagas[vaga].id
-                             << " (próxima à loja " << nomeLoja << ")\n";
+    cout << "===== OTIMIZADOR DE COMPRAS NO SUPERMERCADO =====\n";
+    cout << "Produtos disponíveis:\n";
 
-                        cout << "\nCaminho até a vaga: ";
-                        for (int i : resultado.second) {
-                            cout << (i + 1) << " "; 
-                        }
-                        cout << endl;
-                        gerarGrafoCaminho(resultado.second, vagas[vaga].id);
-                    } else {
-                        cout << "\nNão há vagas disponíveis próximas à loja " << nomeLoja << endl;
-                    }
-                } else {
-                    cout << "\nLoja inválida.\n";
-                }
-                break;
+    for (const auto& par : grafo.getEstantes()) {
+        const Estante& e = par.second;
+        cout << e.id << ". " << e.nomeProduto << " [" << e.tipoProduto << "]\n";
+    }
+
+    cout << "\nInforme os IDs dos produtos que deseja comprar (separados por espaço, termine com -1):\n";
+    vector<int> listaOriginal;
+    int id;
+    while (cin >> id && id != -1) {
+        listaOriginal.push_back(id);
+    }
+
+    if (listaOriginal.empty()) {
+        cout << "Nenhum produto selecionado.\n";
+        return;
+    }
+
+    // Cálculo do percurso na ordem original da lista
+    double distanciaLista = calcularDistanciaLista(grafo, listaOriginal);
+
+    // Gera a ordem otimizada usando heurística simples: sempre ir ao mais próximo
+    vector<int> listaOtimizada;
+    vector<int> restantes = listaOriginal;
+    int atual = restantes.front();
+    listaOtimizada.push_back(atual);
+    restantes.erase(restantes.begin());
+
+    while (!restantes.empty()) {
+        double melhorCusto = numeric_limits<double>::infinity();
+        int proximoMelhor = -1;
+        for (int i = 0; i < (int)restantes.size(); ++i) {
+            double custo = 0;
+            grafo.dijkstra(atual, restantes[i], custo);
+            if (custo < melhorCusto) {
+                melhorCusto = custo;
+                proximoMelhor = i;
             }
-            case 2: {
-                cout << "\nMAPA DO ESTACIONAMENTO\n";
-                cout << "-----------------------\n";
-                for (const Vaga& v : vagas) {
-                    cout << "Vaga " << v.id << " - "
-                         << (v.ocupada ? "OCUPADA" : "LIVRE ")
-                         << " (Loja: " << v.nomeLoja << ")\n";
-                }
-                break;
-            }
-            case 3:
-                #ifdef _WIN32
-                    system("start Desenho.png");
-                #elif __APPLE__
-                    system("open Desenho.png");
-                #else
-                    system("feh Desenho.png");
-                #endif
-
-            case 4:
-                cout << "\nSaindo do sistema...\n";
-                break;
-            default:
-                cout << "\nOpção inválida. Tente novamente.\n";
         }
+        atual = restantes[proximoMelhor];
+        listaOtimizada.push_back(atual);
+        restantes.erase(restantes.begin() + proximoMelhor);
+    }
 
-    } while (opcao != 4);
+    double distanciaOtimizada = calcularDistanciaLista(grafo, listaOtimizada);
+
+    // Mostrar caminho otimizado
+    cout << "\n>> Caminho otimizado:\n";
+    for (int id : listaOtimizada) {
+        Estante e = grafo.getEstantes().at(id);
+        cout << "- Estante " << e.id << " [" << e.tipoProduto << "]: " << e.nomeProduto << "\n";
+    }
+
+    cout << "\nDistância total na ordem da lista original: " << distanciaLista << " metros";
+    cout << "\nDistância total na ordem otimizada:        " << distanciaOtimizada << " metros\n";
+
+    // Gerar visualização para o caminho otimizado
+    vector<int> visualizacaoFinal;
+    for (size_t i = 0; i + 1 < listaOtimizada.size(); ++i) {
+        double custoTemp;
+        vector<int> trecho = grafo.dijkstra(listaOtimizada[i], listaOtimizada[i + 1], custoTemp);
+        if (i > 0) trecho.erase(trecho.begin());
+        visualizacaoFinal.insert(visualizacaoFinal.end(), trecho.begin(), trecho.end());
+    }
+
+    grafo.gerarVisualizacaoDOT(visualizacaoFinal, "caminho_otimizado");
 }
