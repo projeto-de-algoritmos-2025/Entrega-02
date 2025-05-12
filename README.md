@@ -35,11 +35,55 @@ Desenvolver um sistema que representa um **supermercado como um grafo**, permiti
 **Linguagem**:  C++
 ## Pré-requisitos
 
+Antes de rodar o projeto, você precisará ter os seguintes programas instalados:
 
+- **g++** (compilador C++).
+- **make** (ferramenta de automação de builds).
+- **Graphviz (dot)** para gerar e visualizar os grafos do caminho.
+
+### Instalar g++, make e dot
+
+#### No macOS:
+Se você usa macOS, pode instalar com o Homebrew:
+
+```bash
+brew install gcc make graphviz
+```
+
+#### No Linux (Ubuntu/Debian):
+No Linux, instale com:
+
+```bash
+sudo apt update
+sudo apt install build-essential graphviz
+```
+
+## Como compilar e executar o projeto
+### Passo 1: Clonar o repositório
+```bash
+git clone https://github.com/projeto-de-algoritmos-2025/Grafos-2-Supermercado-Inteligente.git
+cd Grafos-2-Supermercado-Inteligente
+```
+
+### Passo 2: Compilar o projeto
+Para compilar o projeto, use o comando make. Isso irá compilar todos os arquivos fonte e gerar o executável:
+
+```bash
+make
+```
+
+### Passo 3: Rodar o projeto
+Após a compilação, execute o programa gerado:
+
+```bash
+ ./Grafos-1-Supermarket
+```
 
 
 ## Uso 
+Após rodar o programa, escolha os produtos da lista. O sistema encontrará fornecerá o caminhos sistema retorna o **caminho ideal para coleta**: Distância total na ordem da lista original e a Distância total na ordem otimizada mais próxima disponível usando o algoritmo, e um grafo será gerado mostrando o caminho.
 
+O grafo será salvo como uma imagem .png
 
 ## Apresentação 
 
