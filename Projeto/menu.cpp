@@ -89,3 +89,11 @@ void executarMenuSupermercado() {
 
     grafo.gerarVisualizacaoDOT(visualizacaoFinal, "caminho_otimizado");
 }
+void dfs(int v, unordered_map<int, vector<Aresta>>& adj, unordered_map<int, bool>& visitado) {
+    visitado[v] = true;
+    for (const auto& aresta : adj[v]) {
+        if (!visitado[aresta.destino])
+            dfs(aresta.destino, adj, visitado);
+    }
+}
+

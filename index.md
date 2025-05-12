@@ -11,7 +11,7 @@
 
 ## 🎯 Objetivo
 
-Desenvolver um sistema que representa um **supermercado como um grafo**, permitindo encontrar o **caminho mais eficiente** para coletar todos os itens de uma **lista de compras** e chegar ao caixa. O sistema utiliza **algoritmos de caminhos mínimos**, levando em conta **distância, tempo ou congestionamento**.
+Desenvolver um sistema que representa um **supermercado como um grafo**, permitindo encontrar o **caminho mais eficiente** para coletar todos os itens de uma **lista de compras** . O sistema utiliza **algoritmos de caminhos mínimos**, levando em conta **distância**.
 
 ---
 
@@ -33,8 +33,6 @@ Cada **nó** representa um ponto do supermercado:
 
 - Corredores  
 - Seções de produtos  
-- Entrada  
-- Caixas
 
 #### Atributos de um nó:
 
@@ -46,11 +44,6 @@ Cada **nó** representa um ponto do supermercado:
 
 As **arestas** representam os caminhos entre os pontos do supermercado.
 
-#### Atributos das arestas:
-
-- `peso`: representa a distância, tempo ou fator de congestionamento entre os pontos
-
-> Durante simulações de **horários de pico**, os pesos podem ser aumentados para refletir o congestionamento.
 
 ---
 
@@ -60,28 +53,12 @@ As **arestas** representam os caminhos entre os pontos do supermercado.
 2. Cada item da lista é associado a um **nó no grafo**.
 3. O algoritmo de **Dijkstra** encontra o menor caminho para:
    - Passar por todos os nós da lista
-   - Finalizar no caixa
    - Começando pela entrada
-4. O sistema retorna o **caminho ideal para coleta**.
-
+4. O sistema retorna o **caminho ideal para coleta**:
+   -Distância total na ordem da lista original
+   -Distância total na ordem otimizada
 ---
 
-## 🌟 Funcionalidades Extras (Planejadas)
-
-- 🔄 **Comparação de algoritmos**: Dijkstra vs A*
-- ⏰ **Simulação de horários de pico**
-- 🧑‍🤝‍🧑 **Múltiplos coletores**: divisão otimizada da lista
-- 🎮 **Modo jogo**: o usuário tenta montar o caminho ideal manualmente e o sistema compara com o algoritmo
-
----
-
-## 📊 Exemplo de Caso de Uso
-
-**Entrada**: Lista de compras: `["banana", "arroz", "detergente"]`  
-**Saída**: Caminho ideal: `Entrada → Frutas → Limpeza → Grãos → Caixa`  
-**Peso total**: `12 unidades de distância`
-
----
 
 ## 🎥 Apresentação
 
