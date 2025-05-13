@@ -28,6 +28,19 @@ void executarMenuSupermercado() {
         cout << e.id << ". " << e.nomeProduto << " [" << e.tipoProduto << "]\n";
     }
 
+    cout << "\nDeseja visualizar o grafo do supermercado? (s/n): ";
+    char resposta;
+    cin >> resposta;
+    if (resposta == 's' || resposta == 'S') {
+        #ifdef _WIN32
+            system("start Grafo.png");
+        #elif __APPLE__
+            system("open Grafo.png");
+        #else
+            system("feh Grafo.png");
+        #endif
+    }
+
     cout << "\nInforme os IDs dos produtos que deseja comprar (separados por espaço, termine com -1):\n";
     vector<int> listaOriginal;
     int id;
@@ -88,6 +101,8 @@ void executarMenuSupermercado() {
     }
 
     grafo.gerarVisualizacaoDOT(visualizacaoFinal, "caminho_otimizado");
+    grafo.imprimirCaminho(visualizacaoFinal, distanciaOtimizada);
+
 }
 void dfs(int v, unordered_map<int, vector<Aresta>>& adj, unordered_map<int, bool>& visitado) {
     visitado[v] = true;

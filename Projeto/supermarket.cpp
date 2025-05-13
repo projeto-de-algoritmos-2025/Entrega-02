@@ -14,6 +14,7 @@ void inicializarLojasSupermercado() {
     // Arestas de ida
     g.adicionarAresta(1, 2, 2.0);
     g.adicionarAresta(2, 3, 1.5);
+    g.adicionarAresta(2, 5, 2.0);
     g.adicionarAresta(3, 4, 2.0);
     g.adicionarAresta(4, 5, 1.0);
     g.adicionarAresta(5, 6, 3.0);
@@ -22,6 +23,7 @@ void inicializarLojasSupermercado() {
     // Arestas de volta (pra formar ciclos)
     g.adicionarAresta(2, 1, 2.0);
     g.adicionarAresta(3, 2, 1.5);
+    g.adicionarAresta(5, 2, 2.0);
     g.adicionarAresta(4, 3, 2.0);
     g.adicionarAresta(5, 4, 1.0);
     g.adicionarAresta(6, 5, 3.0);
