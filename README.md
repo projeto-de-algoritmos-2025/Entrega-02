@@ -27,17 +27,22 @@
 Desenvolver um sistema que representa um **supermercado como um grafo**, permitindo encontrar o **caminho mais eficiente** para coletar todos os itens de uma **lista de compras** e chegar ao caixa. O sistema utiliza **algoritmos de caminhos mínimos**, levando em conta **distância, tempo ou congestionamento**.
 ## Screenshots
 <p align="center">
-  <img src="Documentos/screenshots/Captura de Tela 2025-05-12 às 13.54.28.png" alt="Print 1 do projeto" width="600"/>
+  <img src="Documentos/screenshots/print1.png" alt="Print 1 do projeto" width="600"/>
 </p>
-
+<p align="center">
+  <img src="Documentos/screenshots/grafo.png" alt="Print 1 do projeto" width="600"/>
+</p>
 <p align="center">
   <img src="Documentos/screenshots/Captura de Tela 2025-05-12 às 13.54.45.png" alt="Print 2 do projeto" width="600"/>
 </p>
 
 <p align="center">
-  <img src="Documentos/screenshots/caminho_otimizado.png" alt="Print 3 do projeto" width="600"/>
+  <img src="Documentos/screenshots/printFinal.png" alt="Print 3 do projeto" width="600"/>
 </p>
 
+<p align="center">
+  <img src="Documentos/screenshots/caminho_otimizado.png" alt="Print 3 do projeto" width="600"/>
+</p>
 
 
 
